@@ -28,7 +28,7 @@ body {
   background-color: #222;
 
 }
-.index{
+.stage{
   position: relative;
   width: 100%;
   height: 680px;
@@ -37,7 +37,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden; /*超出屏幕范围的图片隐藏*/
   background-color: #ddd;
 }
 .controller-nav{
