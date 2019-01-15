@@ -1,5 +1,5 @@
 require('normalize.css/normalize.css');
-require('styles/App.css');
+require('styles/App.scss');
 
 
 
@@ -28,7 +28,7 @@ imageDatas = getImageURL(imageDatas);
 
 //单个图片的展示（图片以及图片下的文字）
 /*
-var imgFigure = React.createClass({
+var ImgFigure = React.createClass({
   render: function(){
     return(
       <figure>
@@ -81,7 +81,7 @@ class AppComponent extends React.Component {
     var controllerUnits = [],imgFigures = [];
     //forEach() 方法用于调用数组的每个元素，并将元素传递给回调函数。
     /*imageDatas.forEach(function(value){
-      imgFigures.push(<imgFigure data = {value}/>);
+      imgFigures.push(<ImgFigure data = {value}/>);
     });*/
     imageDatas.forEach((value,index)=>{
       imgFigures.push(<ImgFigure data = {value} key = {index}/>);
