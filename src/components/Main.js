@@ -74,8 +74,79 @@ class AppComponent extends React.Component {
   }
 }
 */
-/*****************************************页面布局start******************************************/
+/*****************************************主组件start******************************************/
 class AppComponent extends React.Component {
+    //常量Constant存储页面布局的可取值范围
+    Constant:{ //中心图片
+      centerPos:{
+        left: 0,
+        right: 0,
+      },
+      hPosRange:{ //图片在水平方向上取值范围
+        leftSecX:[0,0],
+        rightSecX:[0,0],
+        y:[0,0]
+      },
+      vPosRange:{ //图片在垂直方向的取值范围
+        x:[0,0],
+        topY:[0,0]
+      }
+    }
+  //重新布局所有图片，centerIndex指定居中排布的图片
+  rearrange(centerIndex){
+   
+  }
+ //初始化图片状态
+ getInitialStage(){
+    return{
+      imgsArrangeArr:[
+        /*{
+          pos: {
+            left:'0',
+            top:'0'
+          }
+        }*/
+      ]
+    };
+  }
+
+  //组件加载以后，为每个图片计算位置范围,通过ref属性锁定子组件
+  componentDidMount(){
+    //首先获得舞台大小
+    var stageDom = React.findDOMNode(this.refs.stage),
+        stageW = stageDom.scrollWith,
+        stageH = stageDom.scrollHeight,
+        halfStageW = Math.ceil(stageW / 2),
+        halfStageH = Math.ceil(stageH / 2);
+    //获取imgFigure的大小,这里直接ImgFigure0，因为图片是一样大的
+    var imgFigureDOM = React.findDOMNode(this.refs.imgFigure0),
+        imgW = imgFigureDOM.scrollWith,
+        imgH = imgFigureDOM.scrollHeight,
+        halfImgW = Math.ceil(imgW / 2),
+        halfImgH = Math.ceil(imgH / 2);
+    //计算Constant的值-中心图片位置点的取值范围
+    this.Constant.centerPos = {
+      left: halfStageW - halfImgW,
+      top: halfStageH - halfImgH
+    }
+    //计算Constant的值-左侧和右侧位置点的取值范围
+    this.Constant.hPosRange.leftSecX[0] = -halfImgW;
+    this.Constant.hPosRange.leftSecX[1] = halfStageW - halfImgW * 3;
+    this.Constant.hPosRange.rightSecX[0] = halfStageW - halfImgW;
+    this.Constant.hPosRange.rightSecX[1] = stageW - halfImgW;
+    this.Constant.hPosRange.y[0] = -halfImgH;
+    this.Constant.hPosRange.y[1] = stageH - halfImgH;
+
+    //计算Constant的值-上侧位置点的取值范围
+    this.Constant.vPosRange.topY[0] = -halfImgH;
+    this.Constant.vPosRange.topY[1] = halfStageH - halfImgH * 3;
+    this.Constant.vPosRange.x[0] = halfImgW - imgW;
+    this.Constant.vPosRange.x[1] = halfImgW;
+
+   //调用函数，指定第一张居中
+    this.rearrange(0);
+  }
+
   render() {
     //控制组件和图片数组
     var controllerUnits = [],imgFigures = [];
@@ -84,10 +155,21 @@ class AppComponent extends React.Component {
       imgFigures.push(<ImgFigure data = {value}/>);
     });*/
     imageDatas.forEach((value,index)=>{
-      imgFigures.push(<ImgFigure data = {value} key = {index}/>);
+
+      if(!this.state.imgsArrangeArr[index]){
+        this.state.imgsArrangeArr[index] = {
+            pos:{
+              left: 0,
+              top: 0
+            }
+        }
+      }
+
+    imgFigures.push(<ImgFigure data = {value} key = {index} ref = {'imgFigure' + index}/>);
     });
+
     return (
-      <section className = "stage">
+      <section className = "stage" ref = "stage">
         <section className = 'image-sec'>
          {imgFigures}
         </section>
@@ -98,7 +180,7 @@ class AppComponent extends React.Component {
     );
   }
 }
-/*****************************************页面布局end******************************************/
+/*******************************************end********************************************/
 
 AppComponent.defaultProps = {
 };

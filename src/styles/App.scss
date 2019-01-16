@@ -42,6 +42,7 @@ body {
 
   @at-root{
     .img-figure{
+      position: absolute; /*固定位置，所有图片叠加在一起*/
       width: 320px;
       height: 360px;
       margin: 0;
