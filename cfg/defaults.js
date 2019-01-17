@@ -54,7 +54,7 @@ function getDefaultModules() {
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       }
     ]
   };
