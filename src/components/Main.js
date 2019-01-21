@@ -96,16 +96,16 @@ class AppComponent extends React.Component {
     this.Constant = { //中心图片
          centerPos:{
            left: 0,
-           right: 0,
+           right: 0
          },
          hPosRange:{ //图片在水平方向上取值范围
-           leftSecX:[0,0],
-           rightSecX:[0,0],
-           y:[0,0]
+           leftSecX: [0, 0],
+           rightSecX: [0, 0],
+           y: [0, 0]
          },
          vPosRange:{ //图片在垂直方向的取值范围
-           x:[0,0],
-           topY:[0,0]
+           x: [0, 0],
+           topY: [0, 0]
          }
        };
     //初始化图片状态
@@ -150,10 +150,12 @@ class AppComponent extends React.Component {
 
        //布局位于上侧的图片
        imgsArrangeTopArr.forEach((value,index)=>{
-         imgsArrangeTopArr[index].pos = {
-           top: getRangeRandom(vPosRangeTopY[0],vPosRangeTopY[1]),
-           left:getRangeRandom(vPosRangeX[0],vPosRangeX[1])
-         }
+         imgsArrangeTopArr[index] = {
+           pos:{
+            top: getRangeRandom(vPosRangeTopY[0],vPosRangeTopY[1]),
+            left:getRangeRandom(vPosRangeX[0],vPosRangeX[1])
+           }
+          }
        });
 
        //布局左右两侧的状态信息
@@ -167,9 +169,11 @@ class AppComponent extends React.Component {
          else {
            hPosRangeLORX = hPosRangeRightSecX;
          }
-         imgsArrangeArr[i].pos = {
-           top:getRangeRandom(hPosRangeY[0],hPosRangeY[1]),
-           left:getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
+         imgsArrangeArr[i] = {
+           pos:{
+            top:getRangeRandom(hPosRangeY[0],hPosRangeY[1]),
+            left:getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
+           }
          }
        }
        if (imgsArrangeTopArr && imgsArrangeTopArr[0]){
@@ -189,14 +193,14 @@ class AppComponent extends React.Component {
   //组件加载以后，为每个图片计算位置范围,通过ref属性锁定子组件
   componentDidMount() {
     //首先获得舞台大小
-    var stageDom = ReactDOM.findDOMNode(this.refs.stage),
-        stageW = stageDom.scrollWith,
-        stageH = stageDom.scrollHeight,
+    var stageDOM = ReactDOM.findDOMNode(this.refs.stage),
+        stageW = stageDOM.scrollWidth,
+        stageH = stageDOM.scrollHeight,
         halfStageW = Math.ceil(stageW / 2),
         halfStageH = Math.ceil(stageH / 2);
     //获取imgFigure的大小,这里直接ImgFigure0，因为图片是一样大的
     var imgFigureDOM = ReactDOM.findDOMNode(this.refs.imgFigure0),
-        imgW = imgFigureDOM.scrollWith,
+        imgW = imgFigureDOM.scrollWidth,
         imgH = imgFigureDOM.scrollHeight,
         halfImgW = Math.ceil(imgW / 2),
         halfImgH = Math.ceil(imgH / 2);
