@@ -64,7 +64,7 @@ class ImgFigure extends React.Component {
     }
 
     return(
-      <figure className = 'img-figure' style = {styleMedia}>
+      <figure className = 'img-figure' style = {styleObj}>
         <img src={this.props.data.imageURL} alt={this.props.data.title}/>
         <figcaption>
           <h2 className = 'img-title'>{this.props.data.title}</h2>
@@ -161,7 +161,6 @@ class AppComponent extends React.Component {
        //布局左右两侧的状态信息
        for(var i = 0, j = imgsArrangeArr.length, k = j/ 2; i < j; i++){
          var hPosRangeLORX = null;
-
          //一半布局左边，一半布局右边
          if(i < k){
            hPosRangeLORX = hPosRangeLeftSecX;
