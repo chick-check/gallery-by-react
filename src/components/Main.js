@@ -81,7 +81,7 @@ class ImgFigure extends React.Component {
     }
 
     //如果图片的旋转角度有值并且不为0，则添加旋转角度
-    if (this.props.arrange.pos) {
+    if (this.props.arrange.rotate) {
       (['Moz', 'Ms', 'Webkit', '']).forEach((value) => {
         styleObj[value + 'Transform'] = 'rotate(' + this.props.arrange.rotate + 'deg)';
       })
